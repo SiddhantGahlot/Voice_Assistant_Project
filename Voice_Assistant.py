@@ -1,6 +1,7 @@
 import speech_recognition as sr
 import pyttsx3
-import pywhatkit
+import webbrowser
+import urllib.parse
 import datetime
 import wikipedia
 import pyjokes
@@ -26,21 +27,28 @@ def take_command():
             listener.adjust_for_ambient_noise(source)
             audio = listener.listen(source)
             command = listener.recognize_google(audio).lower()
-            if 'buddy' in command:
-                command = command.replace('buddy', '').strip()
-                print(command)
-                return command
     except sr.UnknownValueError:
         talk("Sorry, I didn't catch that. Please repeat.")
     except sr.RequestError:
         talk("Sorry, I am having trouble connecting to the service.")
+    except Exception as e:
+        talk("An error occurred. Please try again.")
+        print(f"Error: {e}")
     return ""
 
 # Function to play a song on YouTube
 def play_song(command):
     song = command.replace('play', '').strip()
-    talk(f'Playing {song}')
-    pywhatkit.playonyt(song)
+    talk(f'Playing {song} on YouTube')
+    
+    # Encode the song name for URL
+    query = urllib.parse.quote(song)
+    
+    # Construct the YouTube search URL
+    url = f"https://www.youtube.com/results?search_query={query}"
+    
+    # Open the URL in the web browser
+    webbrowser.open(url)
 
 # Function to report the current time
 def tell_time():
@@ -50,8 +58,17 @@ def tell_time():
 # Function to search for information on Wikipedia
 def who_is(command):
     person = command.replace('who is', '').strip()
-    info = wikipedia.summary(person, sentences=1)
-    talk(info)
+    try:
+        info = wikipedia.summary(person, sentences=1)
+        talk(info)
+    except wikipedia.exceptions.DisambiguationError as e:
+        talk("There are multiple entries for this. Please be more specific.")
+        print(f"DisambiguationError: {e}")
+    except wikipedia.exceptions.PageError:
+        talk("Sorry, I couldn't find information on that person.")
+    except Exception as e:
+        talk("Sorry, something went wrong while fetching information.")
+        print(f"Error: {e}")
 
 # Function to tell a joke
 def tell_joke():
@@ -62,7 +79,7 @@ def tell_joke():
 def search_web(command):
     query = command.replace('search', '').strip()
     talk(f'Searching for {query}')
-    pywhatkit.search(query)
+    webbrowser.open(f"https://www.google.com/search?q={urllib.parse.quote(query)}")
 
 # Function to open applications
 def open_app(command):
@@ -82,7 +99,7 @@ def restart_system():
 
 # Function to stop the assistant
 def stop_assistant():
-    talk("Goodbye!")
+    talk("Goodbye! See you next time.")
     sys.exit()
 
 # Main function to run the assistant
@@ -114,5 +131,6 @@ def run_buddy():
 
 # Keep the assistant running in a loop
 if __name__ == '__main__':
+    talk("Hello! I'm Buddy. How can I assist you today?")
     while True:
         run_buddy()
