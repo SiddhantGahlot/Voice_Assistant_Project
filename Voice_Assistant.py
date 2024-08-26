@@ -21,12 +21,14 @@ def talk(text):
 
 # Function to take and process the voice command
 def take_command():
+    command = ""
     try:
         with sr.Microphone() as source:
             print('Listening...')
             listener.adjust_for_ambient_noise(source)
             audio = listener.listen(source)
-            command = listener.recognize_google(audio).lower()
+            # Recognize speech using PocketSphinx
+            command = listener.recognize_sphinx(audio).lower()
     except sr.UnknownValueError:
         talk("Sorry, I didn't catch that. Please repeat.")
     except sr.RequestError:
@@ -34,7 +36,7 @@ def take_command():
     except Exception as e:
         talk("An error occurred. Please try again.")
         print(f"Error: {e}")
-    return ""
+    return command
 
 # Function to play a song on YouTube
 def play_song(command):
@@ -134,3 +136,4 @@ if __name__ == '__main__':
     talk("Hello! I'm Buddy. How can I assist you today?")
     while True:
         run_buddy()
+
