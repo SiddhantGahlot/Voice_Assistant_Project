@@ -1,7 +1,7 @@
 🗣️ Custom Voice Assistant - Buddy
 
 🚀 Project Overview
-Buddy is a Python-based Voice Assistant designed to help automate and simplify daily tasks using voice commands. The assistant can play music from YouTube, provide the current time, search the web, tell jokes, and even manage system functions like opening applications or shutting down the computer.
+Buddy is a Python-based Voice Assistant designed to help automate and simplify daily tasks using voice commands. The assistant can play music from YouTube, provide the current time, search the web, tell jokes, and manage system functions like opening applications or shutting down the computer.
 
 ✨ Features
 a) Voice Recognition: Uses the SpeechRecognition library to capture and interpret voice commands.
@@ -17,7 +17,7 @@ h) System Control: Capable of opening applications, restarting, or shutting down
 a) Python: The core programming language for developing the assistant.
 b) SpeechRecognition: For capturing and recognizing voice input.
 c) pyttsx3: For converting text to speech.
-d) pywhatkit: For integrating YouTube and web search functionalities.
+d) webbrowser: For integrating YouTube and web search functionalities.
 e) Wikipedia API: For fetching information from Wikipedia.
 f) pyjokes: For generating and reading out random jokes.
 g) OS Module: For executing system-level commands like opening applications or shutting down the computer.
@@ -40,7 +40,7 @@ g) OS Module: For executing system-level commands like opening applications or s
   python voice_assistant.py
 
 4. Use Voice Commands:-
-a) Say "Play [song name]" to play a song on YouTube.
+a) Say "Play [song name]" to open YouTube search results for a song.
 b) Ask "What is the time?" to get the current time.
 c) Say "Who is [person's name]?" to get a brief summary from Wikipedia.
 d) Use "Tell me a joke" to hear a random joke.
