@@ -71,6 +71,5 @@ apps = {
 
 ## 👨‍💻 Author
 **Siddhant Kumar**
-
-
-LinkedIn
+- **Email:- sg9407176@gmail.com**
+- **LinkedIn:- https://linkdin.com/in/siddhant-gahlot-b91929308**
