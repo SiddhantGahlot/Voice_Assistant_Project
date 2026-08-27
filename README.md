@@ -52,7 +52,7 @@ python voice_assistant.py
 - **"Shutdown" → Shuts down system (after confirmation)**
 - **"Stop" → Exits Buddy**
 
-##⚡ Customization
+## ⚡Customization
 **You can add more applications to the apps dictionary inside voice_assistant.py:**
 ```
 apps = {
